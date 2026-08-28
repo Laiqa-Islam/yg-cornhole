@@ -20,9 +20,9 @@ The homepage uses a sport-performance editorial system rather than the generated
 
 ## Layout and signature
 
-The homepage follows a direct specialist-retail sequence: announcement, category-led navigation, full-bleed custom-board hero, trust strip, visual category tiles, featured bag arena, education, brand story, custom-board feature, reassurance, and newsletter. The page now uses a dark navy, brushed-steel, and signal-red rhythm taken directly from the supplied YG Bags logo. Its signature moment remains the pinned GSAP throwing lane where a bag tracks from control to finish as the user scrolls; this section and animation are preserved from the first concept.
+The homepage follows a direct specialist-retail sequence: announcement, category-led navigation, product-first bag-wall hero, trust strip, visual category tiles, featured bag arena, education, brand story, custom-board feature, reassurance, and newsletter. The page uses a dark navy, brushed-steel, and signal-red rhythm taken directly from the supplied YG Bags logo. Its signature moment remains the pinned GSAP throwing lane where a bag tracks from control to finish as the user scrolls; this section and animation are preserved from the first concept.
 
-The hero and merchandise sections use client-supplied board, bag, apparel, and event imagery. Product cards use a wide 1.62:1 stage in a two-column arena layout so landscape bag photos remain large and uncropped.
+The hero uses the client-supplied background-removed bag wall on the left side of a controlled navy court grid, leaving an uninterrupted copy field on the right. Hero display type uses a readable `.92` line-height plus explicit inter-line spacing instead of the earlier compressed overlap. Product cards use a wide 1.62:1 stage in a two-column arena layout so bag art remains large and uncropped. Client-supplied board, apparel, hoodie, and award cutouts carry the same product-first treatment deeper into the page.
 
 ## Rules
 

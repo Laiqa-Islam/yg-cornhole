@@ -26,18 +26,18 @@ import {
 import HomeMotion from "./ui/home-motion";
 
 const products = [
-  { name: "Menace Moo", profile: "Control / fast", speed: "3 / 8", price: "$79.99", image: "/images/gallery/menace-cow.jpeg", alt: "Menace cow character cornhole bag, front and back" },
-  { name: "USA Menace", profile: "True balance", speed: "5 / 6", price: "$79.99", image: "/images/gallery/usa-menace.jpeg", alt: "USA flag Menace cornhole bag, front and back" },
-  { name: "Bigfoot", profile: "Slow / quick", speed: "3 / 9", price: "$84.99", image: "/images/gallery/america-bigfoot-bag.jpeg", alt: "America Bigfoot cornhole bag, front and back" },
-  { name: "Custom Drop", profile: "Built your way", speed: "4 / 8", price: "$84.99", image: "/images/gallery/bag-lineup.jpeg", alt: "Colorful lineup of custom cornhole bag designs" },
+  { name: "Menace Moo", profile: "Control / fast", speed: "3 / 8", price: "$79.99", image: "/images/pics/pic-05.png", alt: "Menace cow character cornhole bag" },
+  { name: "Hometown Heat", profile: "True balance", speed: "5 / 6", price: "$79.99", image: "/images/pics/pic-08.png", alt: "Pair of black and orange custom cornhole bags" },
+  { name: "Bigfoot", profile: "Slow / quick", speed: "3 / 9", price: "$84.99", image: "/images/pics/pic-10.png", alt: "America Bigfoot cornhole bag" },
+  { name: "Custom Drop", profile: "Built your way", speed: "4 / 8", price: "$84.99", image: "/images/pics/pic-01.png", alt: "Colorful wall of custom cornhole bag designs" },
 ];
 
 const customWork = [
-  { src: "/images/gallery/custom-board-plaid.jpeg", title: "Plaid No. 8", type: "Regulation boards", className: "custom-work-card--wide" },
-  { src: "/images/gallery/custom-board-family.jpeg", title: "Family Night", type: "Personalized set", className: "custom-work-card--tall" },
-  { src: "/images/gallery/birthday-board.jpeg", title: "The 50th Throwdown", type: "Event artwork", className: "" },
-  { src: "/images/gallery/eagles-board.jpeg", title: "Eagles 3373", type: "Club boards", className: "" },
-  { src: "/images/gallery/fishing-board.jpeg", title: "Hops & Reels", type: "Custom concept", className: "custom-work-card--wide" },
+  { src: "/images/gallery/custom-board-detroit.jpeg", title: "Motor City Matchup", type: "Custom board set", description: "A city-first set built around hometown rivalries and league-night energy." },
+  { src: "/images/gallery/custom-board-plaid.jpeg", title: "Plaid No. 8", type: "Regulation boards", description: "Graphic lumberjack plaid with bold numbering that reads clearly down the lane." },
+  { src: "/images/gallery/tournament-awards.jpeg", title: "First Place Finish", type: "Event awards", description: "Mini-board trophies that carry the event identity through the final podium." },
+  { src: "/images/gallery/eagles-board.jpeg", title: "Eagles 3373", type: "Club boards", description: "A clean club build with patriotic detail and high-contrast center artwork." },
+  { src: "/images/gallery/outdoors-board.jpeg", title: "Field & Stream", type: "Custom concept", description: "Full-coverage outdoor artwork made for the cabin and the tournament lane." },
 ];
 
 const faqs = [
@@ -60,7 +60,8 @@ export default function Home() {
       <header className="site-header">
         <div className="header-row">
           <a className="brand" href="#top" aria-label="YG Cornhole home">
-            <Image className="brand-logo" src="/images/yg-bags-logo.jpg" alt="YG Bags" width={234} height={77} priority />
+            <span className="brand-mark" aria-hidden="true"><b>Y</b><b>G</b><b>B</b><b>C</b></span>
+            <span><strong>YG</strong> CORNHOLE</span>
           </a>
 
           <nav className="primary-nav" aria-label="Primary navigation">
@@ -90,8 +91,8 @@ export default function Home() {
       <section className="hero" aria-labelledby="hero-title">
         <Image
           className="hero-backdrop"
-          src="/images/gallery/custom-board-plaid.jpeg"
-          alt="Red and black plaid custom YG Cornhole board set"
+          src="/images/pics/pic-01.png"
+          alt="Colorful wall of YG custom cornhole bags"
           fill
           priority
           sizes="100vw"
@@ -130,12 +131,12 @@ export default function Home() {
 
         <div className="category-grid">
           <a className="category-card category-card--bags reveal-up" href="#featured">
-            <Image src="/images/gallery/bag-lineup.jpeg" alt="YG Cornhole custom bag design lineup" fill sizes="(max-width: 760px) 100vw, 50vw" />
+            <Image src="/images/pics/pic-01.png" alt="YG Cornhole custom bag design lineup" fill sizes="(max-width: 760px) 100vw, 50vw" />
             <div className="category-overlay" />
             <div className="category-copy"><span>Competition bags</span><h3>Find your feel.</h3><b>Shop bags <ArrowRight size={16} /></b></div>
           </a>
           <a className="category-card category-card--boards reveal-up" href="#boards">
-            <Image src="/images/gallery/custom-board-family.jpeg" alt="Blue and black personalized family cornhole boards" fill sizes="(max-width: 760px) 100vw, 50vw" />
+            <Image src="/images/pics/pic-03.png" alt="Blue and black personalized family cornhole boards" fill sizes="(max-width: 760px) 100vw, 50vw" />
             <div className="category-overlay" />
             <div className="category-copy"><span>Custom boards</span><h3>Make the lane yours.</h3><b>Build a set <ArrowRight size={16} /></b></div>
           </a>
@@ -158,13 +159,13 @@ export default function Home() {
             <Image src="/images/gallery/bag-lineup.jpeg" alt="A colorful lineup of custom YG cornhole bag designs" fill sizes="(max-width: 760px) 100vw, 55vw" />
             <div><span>More ways to play</span><strong>The full personality lineup</strong></div>
           </article>
-          <article className="drop-card reveal-clip">
-            <Image src="/images/gallery/menace-cow.jpeg" alt="Menace cow character cornhole bag, front and back" fill sizes="(max-width: 760px) 50vw, 25vw" />
-            <div><span>Menace series</span><strong>Barnyard pressure</strong></div>
+          <article className="drop-card drop-card--cutout reveal-clip">
+            <Image src="/images/pics/pic-08.png" alt="Pair of black and orange custom cornhole bags" fill sizes="(max-width: 760px) 50vw, 25vw" />
+            <div><span>Hometown series</span><strong>Match-day heat</strong></div>
           </article>
-          <article className="drop-card reveal-clip">
-            <Image src="/images/gallery/america-bigfoot-bag.jpeg" alt="America Bigfoot cornhole bag, front and back" fill sizes="(max-width: 760px) 50vw, 25vw" />
-            <div><span>Graphic series</span><strong>Big throw energy</strong></div>
+          <article className="drop-card drop-card--cutout reveal-clip">
+            <Image src="/images/pics/pic-16.png" alt="USA hoodie with matching custom cornhole bags" fill sizes="(max-width: 760px) 50vw, 25vw" />
+            <div><span>Team collection</span><strong>Full match-day kit</strong></div>
           </article>
         </div>
       </section>
@@ -218,7 +219,7 @@ export default function Home() {
         <div className="guide-stage">
           <div className="guide-copy">
             <p className="eyebrow eyebrow--light"><span /> Find your feel</p>
-            <h2 id="guide-title">One lane.<br />Your speed.</h2>
+            <h2 id="guide-title"><span>One lane.</span><span>Your speed.</span></h2>
             <p>Scroll the runway to see how the right bag changes your game—from a controlled block to a fast, clean finish.</p>
           </div>
           <div className="throw-lane" aria-hidden="true">
@@ -237,25 +238,39 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="custom-work content-shell" aria-labelledby="custom-work-title">
-        <div className="custom-work-intro reveal-up">
-          <div><span className="section-label">Recent custom work</span><h2 id="custom-work-title">Your story belongs on the boards.</h2></div>
-          <p>Family traditions, hometown pride, milestone birthdays, club identity—these are not template swaps. Every set begins with the people who will play on it.</p>
+      <section className="custom-work" aria-labelledby="custom-work-title">
+        <div className="custom-work-shell content-shell">
+          <div className="custom-work-intro reveal-up">
+            <div><span className="section-label">Recent custom work</span><h2 id="custom-work-title">Your story belongs on the boards.</h2></div>
+            <p>Family traditions, hometown pride, milestone birthdays, club identity—these are not template swaps. Every set begins with the people who will play on it.</p>
+          </div>
+          <div className="custom-work-grid">
+            {customWork.map((work, index) => (
+              <article className={`custom-work-card reveal-clip${index === 0 ? " custom-work-card--feature" : ""}`} key={work.title}>
+                <div className="custom-work-visual">
+                  <Image
+                    src={work.src}
+                    alt={`${work.title} custom YG Cornhole project`}
+                    fill
+                    sizes={index === 0 ? "(max-width: 760px) 100vw, 62vw" : "(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 25vw"}
+                  />
+                  <span className="custom-work-stamp">Built to play</span>
+                </div>
+                <div className="custom-work-details">
+                  <span>{work.type}</span>
+                  <h3>{work.title}</h3>
+                  <p>{work.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p className="portfolio-note">Selected client work shown for portfolio inspiration. Artwork and marks remain the property of their respective owners.</p>
         </div>
-        <div className="custom-work-grid">
-          {customWork.map((work) => (
-            <article className={`custom-work-card reveal-clip ${work.className}`} key={work.title}>
-              <Image src={work.src} alt={`${work.title} custom YG Cornhole project`} fill sizes="(max-width: 760px) 100vw, 50vw" />
-              <div><span>{work.type}</span><h3>{work.title}</h3></div>
-            </article>
-          ))}
-        </div>
-        <p className="portfolio-note">Selected client work shown for portfolio inspiration. Artwork and marks remain the property of their respective owners.</p>
       </section>
 
       <section className="brand-story" id="why-yg" aria-labelledby="story-title">
-        <div className="story-image reveal-clip">
-          <Image src="/images/gallery/menace-cow.jpeg" alt="Menace bag artwork showing both playing surfaces" fill sizes="(max-width: 850px) 100vw, 50vw" />
+        <div className="story-image story-image--cutout reveal-clip">
+          <Image src="/images/pics/pic-01.png" alt="A wall of YG Cornhole bag designs developed across multiple collections" fill sizes="(max-width: 850px) 100vw, 50vw" />
         </div>
         <div className="story-copy reveal-up">
           <span className="section-label">Built by people who play</span>
@@ -271,7 +286,7 @@ export default function Home() {
       </section>
 
       <section className="boards-banner" id="boards" aria-labelledby="boards-title">
-        <Image src="/images/gallery/custom-board-plaid.jpeg" alt="Custom red and black plaid YG Cornhole board set" fill sizes="100vw" />
+        <Image src="/images/pics/pic-03.png" alt="Pair of blue custom family cornhole boards" fill sizes="100vw" />
         <div className="boards-shade" />
         <div className="boards-content reveal-up">
           <span className="section-label section-label--light">From blank board to game day</span>
@@ -300,16 +315,16 @@ export default function Home() {
           <a className="button button--teal" href="mailto:hello@ygcornhole.com">Start a team order <ArrowRight size={17} /></a>
         </div>
         <div className="jersey-gallery">
-          <div className="jersey-image jersey-image--primary reveal-clip"><Image src="/images/gallery/custom-jersey-black-gold.jpeg" alt="Black and gold custom cornhole jersey shown front and back" fill sizes="(max-width: 760px) 100vw, 35vw" /></div>
-          <div className="jersey-image jersey-image--secondary reveal-clip"><Image src="/images/gallery/custom-jersey-pink.jpeg" alt="Pink and black custom fishing and cornhole jersey design" fill sizes="(max-width: 760px) 70vw, 25vw" /></div>
+          <div className="jersey-image jersey-image--primary reveal-clip"><Image src="/images/pics/pic-06.png" alt="Black and gold custom team jersey shown front and back" fill sizes="(max-width: 760px) 100vw, 35vw" /></div>
+          <div className="jersey-image jersey-image--secondary reveal-clip"><Image src="/images/pics/pic-16.png" alt="USA hoodie and matching custom bag set" fill sizes="(max-width: 760px) 70vw, 25vw" /></div>
         </div>
       </section>
 
       <section className="events-section content-shell" aria-labelledby="events-title">
         <div className="events-copy reveal-up"><span className="section-label">One event. One visual system.</span><h2 id="events-title">Give them something worth playing for.</h2><p>We can take a tournament from first impression to final award with matching event boards, mini trophies, bags, and apparel. Whether it is 16 friends or a full community bracket, the details make the day feel official.</p><div className="event-features"><span><Users /> Leagues & clubs</span><span><CalendarDays /> Birthdays & fundraisers</span><span><Trophy /> Awards & prizes</span></div></div>
         <div className="event-gallery">
-          <div className="event-image event-image--one reveal-clip"><Image src="/images/gallery/tournament-awards.jpeg" alt="Custom mini cornhole board awards for a soccer tournament" fill sizes="(max-width: 760px) 100vw, 35vw" /></div>
-          <div className="event-image event-image--two reveal-clip"><Image src="/images/gallery/timberfest-awards.jpeg" alt="Timberfest Throwdown custom cornhole tournament awards" fill sizes="(max-width: 760px) 70vw, 24vw" /></div>
+          <div className="event-image event-image--one reveal-clip"><Image src="/images/pics/pic-11.png" alt="Custom mini cornhole board awards for a soccer tournament" fill sizes="(max-width: 760px) 100vw, 35vw" /></div>
+          <div className="event-image event-image--two reveal-clip"><Image src="/images/pics/pic-04.png" alt="Timberfest Throwdown custom cornhole tournament awards" fill sizes="(max-width: 760px) 70vw, 24vw" /></div>
         </div>
       </section>
 
@@ -342,7 +357,7 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="footer-main">
-          <div className="footer-brand"><a className="brand" href="#top" aria-label="YG Bags home"><Image className="brand-logo" src="/images/yg-bags-logo.jpg" alt="YG Bags" width={234} height={77} /></a><p>Competition gear with a player’s point of view.</p></div>
+          <div className="footer-brand"><a className="brand" href="#top" aria-label="YG Cornhole home"><span className="brand-mark" aria-hidden="true"><b>Y</b><b>G</b><b>B</b><b>C</b></span><span><strong>YG</strong> CORNHOLE</span></a><p>Competition gear with a player’s point of view.</p></div>
           <div><h3>Shop</h3><a href="#featured">Cornhole bags</a><a href="#boards">Custom boards</a><a href="#apparel">Apparel</a></div>
           <div><h3>Help</h3><a href="mailto:hello@ygcornhole.com">Contact us</a><a href="#top">Shipping</a><a href="#top">Returns</a></div>
           <div><h3>YG Cornhole</h3><a href="#why-yg">Our story</a><a href="#throw-guide">Speed guide</a><a href="#top">ACL approval</a></div>
