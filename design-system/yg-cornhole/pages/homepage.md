@@ -4,13 +4,13 @@ The homepage uses a sport-performance editorial system rather than the generated
 
 ## Visual language
 
-- Ink `#132126`: primary type and dark performance sections
-- Graphite `#26343A`: secondary surfaces
-- Slate `#65757B`: supporting text
-- Mist `#E9F0F1`: product and information surfaces
-- Paper `#F7FAF9`: page canvas
-- Teal `#009F98`: primary action and brand accent
-- Bright teal `#00C9B7`: dark-surface accent and focus state
+- Midnight `#0D151E`: header, product arena, and primary dark sections
+- Competition navy `#142535`: equipment cards and trust surfaces
+- Graphite `#283440`: secondary surfaces
+- Steel `#AEB6BD`: dividers and material-inspired supporting details
+- Mist `#E8ECEF`: product and information surfaces
+- Signal red `#A73136`: announcement, calls to action, and match-day emphasis
+- Bright red `#DF5A5D`: dark-surface labels and accessible focus state
 
 ## Type
 
@@ -20,7 +20,9 @@ The homepage uses a sport-performance editorial system rather than the generated
 
 ## Layout and signature
 
-The layout pairs oversized campaign typography with real YG product photography and restrained technical-grid details. Its signature moment is one pinned GSAP throwing lane where a bag tracks from control to finish as the user scrolls. All other motion remains short, transform-based, and subordinate to shopping.
+The homepage follows a direct specialist-retail sequence: announcement, category-led navigation, full-bleed custom-board hero, trust strip, visual category tiles, featured bag arena, education, brand story, custom-board feature, reassurance, and newsletter. The page now uses a dark navy, brushed-steel, and signal-red rhythm taken directly from the supplied YG Bags logo. Its signature moment remains the pinned GSAP throwing lane where a bag tracks from control to finish as the user scrolls; this section and animation are preserved from the first concept.
+
+The hero and merchandise sections use client-supplied board, bag, apparel, and event imagery. Product cards use a wide 1.62:1 stage in a two-column arena layout so landscape bag photos remain large and uncropped.
 
 ## Rules
 

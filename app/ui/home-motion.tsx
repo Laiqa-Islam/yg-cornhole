@@ -24,11 +24,11 @@ export default function HomeMotion() {
         .from(".hero-eyebrow", { y: 16, opacity: 0, duration: 0.5 }, "-=0.25")
         .from(".hero-line", { yPercent: 105, rotate: 2, opacity: 0, duration: 0.85, stagger: 0.12 }, "-=0.25")
         .from(".hero-lede, .hero-actions", { y: 20, opacity: 0, duration: 0.6, stagger: 0.08 }, "-=0.45")
-        .from(".hero-image-wrap", { scale: 0.88, y: 30, opacity: 0, duration: 1 }, "-=0.95")
-        .from(".hero-product-tag, .acl-badge", { y: 15, opacity: 0, duration: 0.5, stagger: 0.08 }, "-=0.45");
+        .from(".hero-corner", { x: -18, opacity: 0, duration: 0.55 }, "-=0.35");
 
-      gsap.to(".hero-product", {
-        yPercent: -7,
+      gsap.to(".hero-backdrop", {
+        yPercent: 6,
+        scale: 1.08,
         ease: "none",
         scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.7 },
       });
