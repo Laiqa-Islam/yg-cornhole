@@ -34,8 +34,8 @@ const products = [
 
 const customWork = [
   { src: "/images/gallery/custom-board-detroit.jpeg", title: "Motor City Matchup", type: "Custom board set", description: "A city-first set built around hometown rivalries and league-night energy." },
-  { src: "/images/gallery/custom-board-plaid.jpeg", title: "Plaid No. 8", type: "Regulation boards", description: "Graphic lumberjack plaid with bold numbering that reads clearly down the lane." },
-  { src: "/images/gallery/tournament-awards.jpeg", title: "First Place Finish", type: "Event awards", description: "Mini-board trophies that carry the event identity through the final podium." },
+  { src: "/images/gallery/birthday-board.jpeg", title: "The 50th Throwdown", type: "Event artwork", description: "A single-board birthday build that turns one milestone into the center of game day." },
+  { src: "/images/gallery/fishing-board.jpeg", title: "Hops & Reels", type: "Custom concept", description: "A full-board fishing composition built around the people, places, and stories behind the game." },
   { src: "/images/gallery/eagles-board.jpeg", title: "Eagles 3373", type: "Club boards", description: "A clean club build with patriotic detail and high-contrast center artwork." },
   { src: "/images/gallery/outdoors-board.jpeg", title: "Field & Stream", type: "Custom concept", description: "Full-coverage outdoor artwork made for the cabin and the tournament lane." },
 ];
@@ -156,7 +156,7 @@ export default function Home() {
         </div>
         <div className="drop-grid">
           <article className="drop-card drop-card--lineup reveal-clip">
-            <Image src="/images/gallery/bag-lineup.jpeg" alt="A colorful lineup of custom YG cornhole bag designs" fill sizes="(max-width: 760px) 100vw, 55vw" />
+            <Image src="/images/pics/pic-01.png" alt="A colorful lineup of custom YG cornhole bag designs" fill sizes="(max-width: 760px) 100vw, 55vw" />
             <div><span>More ways to play</span><strong>The full personality lineup</strong></div>
           </article>
           <article className="drop-card drop-card--cutout reveal-clip">
