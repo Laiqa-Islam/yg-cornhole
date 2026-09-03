@@ -18,7 +18,7 @@ export default function SiteHeader() {
 
           <nav className="primary-nav" aria-label="Primary navigation">
             <Link href="/acl-bags">ACL Bags</Link>
-            <Link href="/shop?category=custom-boards">Custom boards</Link>
+            <Link href="/shop">Shop Now</Link>
             <Link href="/about">About YG</Link>
             <Link href="/contact">Contact</Link>
           </nav>
@@ -31,7 +31,7 @@ export default function SiteHeader() {
               <nav aria-label="Mobile navigation">
                 <Link href="/shop">Shop all</Link>
                 <Link href="/acl-bags">ACL Bags</Link>
-                <Link href="/shop?category=custom-boards">Custom boards</Link>
+                <Link href="/shop">Shop Now</Link>
                 <Link href="/about">About YG</Link>
                 <Link href="/contact">Contact</Link>
               </nav>
