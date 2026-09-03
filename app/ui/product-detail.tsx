@@ -45,6 +45,15 @@ export default function ProductDetail({ product }: { product: Product }) {
           <div className="product-price-row"><strong>{formatPrice(product.price)}</strong><span><Star size={14} fill="currentColor" /> 5.0 / player rated</span></div>
           <p className="product-description">{product.description}</p>
 
+          {isBag && product.speedFast && product.speedControl && (
+            <div className="product-speed-profile" aria-label={`${product.speedFast} fast side and ${product.speedControl} control side`}>
+              <span><strong>{product.speedFast}</strong><b>Fast side</b></span>
+              <i aria-hidden="true" />
+              <span><strong>{product.speedControl}</strong><b>Control side</b></span>
+              <Link href="/acl-bags">Compare all ACL bags</Link>
+            </div>
+          )}
+
           <fieldset className="product-option">
             <legend>{isBag ? "Set" : isBoard ? "Configuration" : "Size"} <b>{size}</b></legend>
             <div>{product.sizes.map((option) => <button type="button" className={size === option ? "is-selected" : ""} onClick={() => setSize(option)} key={option}>{option}</button>)}</div>

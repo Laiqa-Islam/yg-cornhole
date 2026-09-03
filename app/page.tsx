@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowRight,
   BadgeCheck,
@@ -6,7 +7,6 @@ import {
   ChevronRight,
   CircleCheck,
   DraftingCompass,
-  Heart,
   Layers3,
   PackageCheck,
   Paintbrush,
@@ -23,10 +23,10 @@ import HomeMotion from "./ui/home-motion";
 import SiteHeader from "./ui/site-header";
 
 const products = [
-  { name: "Menace Moo", profile: "Control / fast", speed: "3 / 8", price: "$79.99", image: "/images/pics/pic-05.png", alt: "Menace cow character cornhole bag" },
-  { name: "Hometown Heat", profile: "True balance", speed: "5 / 6", price: "$79.99", image: "/images/pics/pic-08.png", alt: "Pair of black and orange custom cornhole bags" },
-  { name: "Bigfoot", profile: "Slow / quick", speed: "3 / 9", price: "$84.99", image: "/images/pics/pic-10.png", alt: "America Bigfoot cornhole bag" },
-  { name: "Custom Drop", profile: "Built your way", speed: "4 / 8", price: "$84.99", image: "/images/pics/pic-01.png", alt: "Colorful wall of custom cornhole bag designs" },
+  { name: "Phenom X", profile: "Quick / composed", speed: "7 / 4.5", price: "$84.99", image: "/images/shop/phenom-x.jpeg", alt: "Patriotic skull Phenom X cornhole bags", slug: "phenom-x-bags" },
+  { name: "Felon X", profile: "True balance", speed: "7 / 5", price: "$79.99", image: "/images/shop/felon-x.jpeg", alt: "Patriotic Felon X cornhole bags", slug: "felon-x-bags" },
+  { name: "Menace X", profile: "Block / finish", speed: "8 / 3", price: "$79.99", image: "/images/shop/menace-x.jpeg", alt: "Patriotic Menace X cornhole bags", slug: "menace-x-bags" },
+  { name: "Prodigy X", profile: "Versatile pace", speed: "8 / 5", price: "$84.99", image: "/images/shop/prodigy-x.jpeg", alt: "Patriotic Prodigy X cornhole bags", slug: "prodigy-x-bags" },
 ];
 
 const customWork = [
@@ -69,8 +69,8 @@ export default function Home() {
           </h1>
           <p className="hero-lede">Competition-grade cornhole bags, custom boards, and apparel made for players who never stop tuning their game.</p>
           <div className="hero-actions">
-            <a className="button button--teal" href="#featured">Shop cornhole bags <ArrowRight size={17} /></a>
-            <a className="button button--outline" href="#boards">Build custom boards</a>
+            <Link className="button button--teal" href="/shop?category=cornhole-bags">Shop cornhole bags <ArrowRight size={17} /></Link>
+            <Link className="button button--outline" href="/shop?category=custom-boards">Build custom boards</Link>
           </div>
         </div>
         <div className="hero-corner">
@@ -89,24 +89,24 @@ export default function Home() {
       <section className="category-section content-shell" aria-labelledby="category-title">
         <div className="section-header reveal-up">
           <div><span className="section-label">Shop the lineup</span><h2 id="category-title">Gear for every kind of game.</h2></div>
-          <a className="arrow-link" href="#featured">Shop all gear <ArrowRight size={16} /></a>
+          <Link className="arrow-link" href="/shop">Shop all gear <ArrowRight size={16} /></Link>
         </div>
 
         <div className="category-grid">
-          <a className="category-card category-card--bags reveal-up" href="#featured">
+          <Link className="category-card category-card--bags reveal-up" href="/acl-bags">
             <Image src="/images/pics/pic-01.png" alt="YG Cornhole custom bag design lineup" fill sizes="(max-width: 760px) 100vw, 50vw" />
             <div className="category-overlay" />
             <div className="category-copy"><span>Competition bags</span><h3>Find your feel.</h3><b>Shop bags <ArrowRight size={16} /></b></div>
-          </a>
-          <a className="category-card category-card--boards reveal-up" href="#boards">
+          </Link>
+          <Link className="category-card category-card--boards reveal-up" href="/shop?category=custom-boards">
             <Image src="/images/pics/pic-03.png" alt="Blue and black personalized family cornhole boards" fill sizes="(max-width: 760px) 100vw, 50vw" />
             <div className="category-overlay" />
             <div className="category-copy"><span>Custom boards</span><h3>Make the lane yours.</h3><b>Build a set <ArrowRight size={16} /></b></div>
-          </a>
-          <a className="category-card category-card--apparel reveal-up" id="apparel" href="#newsletter">
+          </Link>
+          <Link className="category-card category-card--apparel reveal-up" id="apparel" href="/shop?category=t-shirts">
             <div className="apparel-backdrop"><Shirt aria-hidden="true" strokeWidth={1.2} /></div>
             <div className="category-copy"><span>YG apparel</span><h3>Wear the game.</h3><b>Shop apparel <ArrowRight size={16} /></b></div>
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -115,7 +115,7 @@ export default function Home() {
           <span className="section-label section-label--light">Fresh from the shop</span>
           <h2 id="drop-title">Built loud.<br />Thrown clean.</h2>
           <p>Original personalities, serious playing surfaces. Pick the design that feels like you, then choose the speed profile that fits your release.</p>
-          <a className="button button--white" href="#featured">Explore the bag wall <ArrowRight size={17} /></a>
+          <Link className="button button--white" href="/shop?category=cornhole-bags">Explore the bag wall <ArrowRight size={17} /></Link>
         </div>
         <div className="drop-grid">
           <article className="drop-card drop-card--lineup reveal-clip">
@@ -136,8 +136,8 @@ export default function Home() {
       <section className="featured-section" id="featured" aria-labelledby="featured-title">
         <div className="content-shell">
           <div className="section-header reveal-up">
-            <div><span className="section-label">Player favorites</span><h2 id="featured-title">Choose your speed.</h2></div>
-            <a className="arrow-link" href="#throw-guide">Compare bag profiles <ArrowRight size={16} /></a>
+            <div><span className="section-label">ACL player lineup</span><h2 id="featured-title">Choose your speed.</h2></div>
+            <Link className="arrow-link" href="/acl-bags">Compare bag profiles <ArrowRight size={16} /></Link>
           </div>
           <div className="product-grid">
             {products.map((product, index) => (
@@ -146,11 +146,10 @@ export default function Home() {
                   <Image src={product.image} alt={product.alt} fill sizes="(max-width: 760px) 80vw, 25vw" />
                   <span className="product-index" aria-hidden="true">0{index + 1}</span>
                   {index === 0 && <span className="product-badge">Best seller</span>}
-                  <button aria-label={`Save ${product.name}`}><Heart size={18} /></button>
                 </div>
                 <div className="product-meta"><span>{product.profile}</span><span>Speed {product.speed}</span></div>
                 <h3>{product.name}</h3>
-                <div className="product-footer"><strong>{product.price}</strong><a href="#featured">View bag <ChevronRight size={16} /></a></div>
+                <div className="product-footer"><strong>{product.price}</strong><Link href={`/shop/${product.slug}`}>View bag <ChevronRight size={16} /></Link></div>
               </article>
             ))}
           </div>
@@ -244,7 +243,7 @@ export default function Home() {
             <div><strong>ACL</strong><span>Approved</span></div>
             <div><strong>USA</strong><span>Made with care</span></div>
           </div>
-          <a className="button button--ink" href="#newsletter">Meet YG Cornhole <ArrowRight size={17} /></a>
+          <Link className="button button--ink" href="/about">Meet YG Cornhole <ArrowRight size={17} /></Link>
         </div>
       </section>
 
@@ -255,7 +254,7 @@ export default function Home() {
           <span className="section-label section-label--light">From blank board to game day</span>
           <h2 id="boards-title">Your design.<br />Official play.</h2>
           <p>Regulation builds, custom graphics, and the craftsmanship to become the set everyone asks about.</p>
-          <a className="button button--white" href="mailto:hello@ygcornhole.com">Start a custom set <ArrowRight size={17} /></a>
+          <Link className="button button--white" href="/contact">Start a custom set <ArrowRight size={17} /></Link>
         </div>
       </section>
 
@@ -275,7 +274,7 @@ export default function Home() {
           <h2 id="apparel-title">Custom jerseys, built for your crew.</h2>
           <p>League night, a tournament run, or the whole club—carry your identity from the boards to the bracket with coordinated colors, names, and graphics.</p>
           <ul><li><CircleCheck size={17} /> Front-and-back custom layouts</li><li><CircleCheck size={17} /> Team color and sponsor placement</li><li><CircleCheck size={17} /> Individual player names available</li></ul>
-          <a className="button button--teal" href="mailto:hello@ygcornhole.com">Start a team order <ArrowRight size={17} /></a>
+          <Link className="button button--teal" href="/contact">Start a team order <ArrowRight size={17} /></Link>
         </div>
         <div className="jersey-gallery">
           <div className="jersey-image jersey-image--primary reveal-clip"><Image src="/images/pics/pic-06.png" alt="Black and gold custom team jersey shown front and back" fill sizes="(max-width: 760px) 100vw, 35vw" /></div>
@@ -301,7 +300,7 @@ export default function Home() {
       </section>
 
       <section className="faq-section content-shell" aria-labelledby="faq-title">
-        <div className="faq-intro reveal-up"><span className="section-label">Straight answers</span><h2 id="faq-title">Before you throw.</h2><p>Need something more specific? Talk directly with the shop and we&apos;ll help you find the right next step.</p><a className="arrow-link" href="mailto:hello@ygcornhole.com">Ask YG Cornhole <ArrowRight size={16} /></a></div>
+        <div className="faq-intro reveal-up"><span className="section-label">Straight answers</span><h2 id="faq-title">Before you throw.</h2><p>Need something more specific? Talk directly with the shop and we&apos;ll help you find the right next step.</p><Link className="arrow-link" href="/contact">Ask YG Cornhole <ArrowRight size={16} /></Link></div>
         <div className="faq-list">
           {faqs.map(([question, answer], index) => <details className="reveal-up" key={question} open={index === 0}><summary><span>0{index + 1}</span>{question}<b>+</b></summary><p>{answer}</p></details>)}
         </div>
@@ -320,10 +319,10 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="footer-main">
-          <div className="footer-brand"><a className="brand" href="#top" aria-label="YG Cornhole home"><span className="brand-mark" aria-hidden="true"><b>Y</b><b>G</b><b>B</b><b>C</b></span><span><strong>YG</strong> CORNHOLE</span></a><p>Competition gear with a player’s point of view.</p></div>
-          <div><h3>Shop</h3><a href="#featured">Cornhole bags</a><a href="#boards">Custom boards</a><a href="#apparel">Apparel</a></div>
-          <div><h3>Help</h3><a href="mailto:hello@ygcornhole.com">Contact us</a><a href="#top">Shipping</a><a href="#top">Returns</a></div>
-          <div><h3>YG Cornhole</h3><a href="#why-yg">Our story</a><a href="#throw-guide">Speed guide</a><a href="#top">ACL approval</a></div>
+          <div className="footer-brand"><Link className="brand" href="/" aria-label="YG Cornhole home"><span className="brand-mark" aria-hidden="true"><b>Y</b><b>G</b><b>B</b><b>C</b></span><span><strong>YG</strong> CORNHOLE</span></Link><p>Competition gear with a player’s point of view.</p></div>
+          <div><h3>Shop</h3><Link href="/acl-bags">ACL bags</Link><Link href="/shop?category=custom-boards">Custom boards</Link><Link href="/shop?category=t-shirts">Apparel</Link></div>
+          <div><h3>Help</h3><Link href="/contact">Contact us</Link><Link href="/contact">Shipping</Link><Link href="/contact">Returns</Link></div>
+          <div><h3>YG Cornhole</h3><Link href="/about">Our story</Link><Link href="/acl-bags">Speed guide</Link><Link href="/acl-bags">ACL approval</Link></div>
         </div>
         <div className="footer-bottom"><span>© 2026 YG Cornhole</span><span>Made for the cornhole community.</span></div>
       </footer>
