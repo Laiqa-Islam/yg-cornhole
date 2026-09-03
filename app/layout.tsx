@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
+import "./store.css";
+import { CartProvider } from "./ui/cart-provider";
+import ToastProvider from "./ui/toast-provider";
 
 export const metadata: Metadata = {
   title: "YG Cornhole | Competition Bags, Boards & Apparel",
@@ -7,10 +11,10 @@ export const metadata: Metadata = {
   icons: { icon: "/icon.png", apple: "/icon.png" },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body><CartProvider>{children}<ToastProvider /></CartProvider></body>
     </html>
   );
 }

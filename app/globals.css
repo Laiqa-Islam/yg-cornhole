@@ -57,8 +57,8 @@ img { display: block; }
 .primary-nav a::after { content: ""; position: absolute; left: 0; bottom: 5px; width: 100%; height: 2px; background: var(--teal); transform: scaleX(0); transform-origin: right; transition: transform .22s ease; }
 .primary-nav a:hover::after { transform: scaleX(1); transform-origin: left; }
 .header-tools { display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
-.header-tools > button, .mobile-menu > summary { width: 44px; height: 44px; display: grid; place-items: center; border: 0; background: transparent; border-radius: 50%; transition: background .2s ease; }
-.header-tools > button:hover, .mobile-menu > summary:hover { background: rgba(255,255,255,.1); }
+.header-tools > button, .header-icon-link, .cart-nav-link, .mobile-menu > summary { width: 44px; height: 44px; display: grid; place-items: center; border: 0; background: transparent; border-radius: 50%; transition: background .2s ease; }
+.header-tools > button:hover, .header-icon-link:hover, .cart-nav-link:hover, .mobile-menu > summary:hover { background: rgba(255,255,255,.1); }
 .bag-button { position: relative; }
 .bag-button span { position: absolute; right: 1px; top: 0; width: 17px; height: 17px; display: grid; place-items: center; border-radius: 50%; background: var(--teal); color: white; font: 700 9px var(--font-mono), monospace; }
 .mobile-menu { display: none; position: relative; }
@@ -359,7 +359,7 @@ img { display: block; }
   .announcement { min-height: 34px; justify-content: center; text-align: center; font-size: 8px; }
   .announcement a { display: none; }
   .header-row { height: 72px; }
-  .header-tools > button[aria-label="Search"], .header-tools > button[aria-label="Account"] { display: none; }
+  .header-tools > button[aria-label="Search"], .header-tools > button[aria-label="Account"], .header-icon-link { display: none; }
   .brand { font-size: 16px; }
   .brand-mark { width: 35px; }
   .hero { height: calc(100svh - 106px); min-height: 700px; max-height: 820px; }

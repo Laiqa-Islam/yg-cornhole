@@ -5,17 +5,13 @@ import {
   CalendarDays,
   ChevronRight,
   CircleCheck,
-  CircleUserRound,
   DraftingCompass,
   Heart,
   Layers3,
-  Menu,
   PackageCheck,
   Paintbrush,
-  Search,
   ShieldCheck,
   Shirt,
-  ShoppingBag,
   Sparkles,
   Star,
   Target,
@@ -24,6 +20,7 @@ import {
   Users,
 } from "lucide-react";
 import HomeMotion from "./ui/home-motion";
+import SiteHeader from "./ui/site-header";
 
 const products = [
   { name: "Menace Moo", profile: "Control / fast", speed: "3 / 8", price: "$79.99", image: "/images/pics/pic-05.png", alt: "Menace cow character cornhole bag" },
@@ -52,41 +49,7 @@ export default function Home() {
     <main id="top">
       <HomeMotion />
 
-      <div className="announcement">
-        <span>Free U.S. shipping on bag orders over $100</span>
-        <a href="#featured">Shop ACL-approved bags <ArrowRight size={14} /></a>
-      </div>
-
-      <header className="site-header">
-        <div className="header-row">
-          <a className="brand" href="#top" aria-label="YG Cornhole home">
-            <span className="brand-mark" aria-hidden="true"><b>Y</b><b>G</b><b>B</b><b>C</b></span>
-            <span><strong>YG</strong> CORNHOLE</span>
-          </a>
-
-          <nav className="primary-nav" aria-label="Primary navigation">
-            <a href="#featured">Cornhole bags</a>
-            <a href="#boards">Custom boards</a>
-            <a href="#apparel">Apparel</a>
-            <a href="#why-yg">About YG</a>
-          </nav>
-
-          <div className="header-tools">
-            <button aria-label="Search"><Search size={20} /></button>
-            <button aria-label="Account"><CircleUserRound size={20} /></button>
-            <button aria-label="Shopping bag" className="bag-button"><ShoppingBag size={20} /><span>0</span></button>
-            <details className="mobile-menu">
-              <summary aria-label="Open menu"><Menu size={22} /></summary>
-              <nav aria-label="Mobile navigation">
-                <a href="#featured">Cornhole bags</a>
-                <a href="#boards">Custom boards</a>
-                <a href="#apparel">Apparel</a>
-                <a href="#why-yg">About YG</a>
-              </nav>
-            </details>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="hero" aria-labelledby="hero-title">
         <Image
