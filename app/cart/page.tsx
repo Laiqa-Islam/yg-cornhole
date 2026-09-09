@@ -6,5 +6,6 @@ import StoreFooter from "../ui/store-footer";
 export const metadata: Metadata = { title: "Your Cart | YG Cornhole" };
 
 export default function Cart() {
-  return <main className="store-page" id="main-content"><SiteHeader /><CartPage /><StoreFooter /></main>;
+  const paypalEnvironment = process.env.PAYPAL_ENV === "live" ? "live" : "sandbox";
+  return <main className="store-page" id="main-content"><SiteHeader /><CartPage paypalClientId={process.env.PAYPAL_CLIENT_ID ?? ""} paypalEnvironment={paypalEnvironment} /><StoreFooter /></main>;
 }

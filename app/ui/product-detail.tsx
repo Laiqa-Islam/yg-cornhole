@@ -75,7 +75,7 @@ export default function ProductDetail({ product }: { product: Product }) {
           <p className="cart-status" aria-live="polite">{status}</p>
 
           <div className="product-assurances">
-            <span><Truck size={20} /><b>{isBoard ? "Build delivery" : "Free shipping"}</b>{isBoard ? "Confirmed with your custom order" : "Bag orders over $100"}</span>
+            <span><Truck size={20} /><b>{isBoard ? "Build delivery" : "Tracked delivery"}</b>{isBoard ? "Confirmed with your custom order" : "Delivery options shown at checkout"}</span>
             <span><ShieldCheck size={20} /><b>Built with care</b>Checked before it leaves the shop</span>
           </div>
         </div>

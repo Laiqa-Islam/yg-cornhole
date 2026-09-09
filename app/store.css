@@ -140,9 +140,32 @@
 .cart-summary dl div { padding: 14px 0; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.13); color: #abb7c0; font-size: 13px; }
 .cart-summary dl div:last-child { color: white; font-size: 16px; font-weight: 800; }
 .cart-summary dd { margin: 0; }
-.cart-summary > a:first-of-type { min-height: 55px; padding: 0 18px; display: flex; justify-content: center; align-items: center; gap: 10px; background: var(--red); color: white; font: 700 10px var(--font-mono), monospace; text-transform: uppercase; }
 .cart-summary > p { color: #8f9da7; font-size: 11px; line-height: 1.55; }
-.cart-summary > a:last-child { min-height: 44px; display: flex; align-items: center; justify-content: center; color: #bec8cf; font: 700 10px var(--font-mono), monospace; text-decoration: underline; text-underline-offset: 4px; text-transform: uppercase; }
+.cart-summary > a { min-height: 44px; display: flex; align-items: center; justify-content: center; color: #bec8cf; font: 700 10px var(--font-mono), monospace; text-decoration: underline; text-underline-offset: 4px; text-transform: uppercase; }
+.paypal-checkout { margin-top: 22px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.14); }
+.paypal-checkout__heading { margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; color: white; }
+.paypal-checkout__heading span { font: 700 9px var(--font-mono), monospace; letter-spacing: .1em; text-transform: uppercase; }
+.paypal-checkout__heading svg { color: var(--teal-bright); }
+.paypal-button-shell { min-height: 48px; position: relative; display: grid; align-items: center; overflow: hidden; background: #f2ba36; }
+.paypal-button-shell paypal-button { width: 100%; min-height: 48px; display: block; cursor: pointer; }
+.paypal-button-shell > p { margin: 0; padding: 14px; color: #172638; text-align: center; font: 700 10px var(--font-mono), monospace; text-transform: uppercase; }
+.paypal-checkout > p { margin: 12px 0 0; display: flex; align-items: flex-start; gap: 7px; color: #8f9da7; font-size: 10px; line-height: 1.5; }
+.paypal-checkout > p svg { margin-top: 1px; flex: 0 0 auto; color: var(--teal-bright); }
+.paypal-config-note { margin: 22px 0 5px; padding: 15px; display: grid; grid-template-columns: 22px 1fr; gap: 10px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.13); }
+.paypal-config-note svg { color: var(--teal-bright); }
+.paypal-config-note div { display: grid; gap: 4px; }
+.paypal-config-note strong { color: white; font: 700 10px var(--font-mono), monospace; text-transform: uppercase; }
+.paypal-config-note span { color: #9daab4; font-size: 11px; line-height: 1.45; }
+
+.order-confirmation { min-height: 690px; padding: clamp(90px, 10vw, 150px) var(--gutter); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background-color: #0d1924; background-image: linear-gradient(rgba(255,255,255,.032) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.032) 1px, transparent 1px), radial-gradient(circle at 50% 34%, #29465c 0, transparent 40%); background-size: 54px 54px, 54px 54px, auto; color: white; }
+.order-confirmation > svg { margin-bottom: 22px; color: var(--teal-bright); }
+.order-confirmation > span { color: var(--teal-bright); font: 700 10px var(--font-mono), monospace; letter-spacing: .11em; text-transform: uppercase; }
+.order-confirmation h1 { max-width: 900px; margin: 15px 0 22px; font: 800 clamp(58px, 7vw, 104px)/.94 var(--font-display), sans-serif; text-transform: uppercase; }
+.order-confirmation > p { max-width: 620px; margin: 0; color: #b8c3cb; font-size: 16px; line-height: 1.7; }
+.order-confirmation > div { margin-top: 30px; padding: 15px 23px; display: grid; gap: 5px; border: 1px solid rgba(255,255,255,.16); }
+.order-confirmation small { color: #8f9da7; font: 700 8px var(--font-mono), monospace; text-transform: uppercase; }
+.order-confirmation strong { font: 700 12px var(--font-mono), monospace; letter-spacing: .06em; }
+.order-confirmation a { min-height: 52px; margin-top: 30px; padding: 0 22px; display: inline-flex; align-items: center; gap: 9px; background: var(--red); color: white; font: 700 10px var(--font-mono), monospace; text-transform: uppercase; }
 .empty-cart { min-height: 650px; padding: 90px var(--gutter); display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #0d1924; background-image: radial-gradient(circle at 50% 40%, #27445b, transparent 42%); color: white; text-align: center; }
 .empty-cart > svg { margin-bottom: 25px; color: var(--teal-bright); }
 .empty-cart h1 { max-width: 850px; }

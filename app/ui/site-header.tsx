@@ -1,14 +1,10 @@
 import Link from "next/link";
-import { ArrowRight, Menu, Search } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import CartLink from "./cart-link";
 
 export default function SiteHeader() {
   return (
     <>
-      <div className="announcement">
-        <span>Free U.S. shipping on bag orders over $100</span>
-        <Link href="/acl-bags">Compare ACL bags <ArrowRight size={14} /></Link>
-      </div>
       <header className="site-header">
         <div className="header-row">
           <Link className="brand" href="/" aria-label="YG Cornhole home">

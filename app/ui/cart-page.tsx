@@ -5,17 +5,17 @@ import Link from "next/link";
 import { ArrowRight, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { formatPrice, products } from "../data/products";
 import { useCart } from "./cart-provider";
+import PayPalCheckout from "./paypal-checkout";
 
-export default function CartPage() {
+export default function CartPage({ paypalClientId, paypalEnvironment }: { paypalClientId: string; paypalEnvironment: "sandbox" | "live" }) {
   const { items, updateQuantity, removeItem, clearCart } = useCart();
   const lines = items.flatMap((line) => {
     const product = products.find((candidate) => candidate.slug === line.slug);
     return product ? [{ ...line, product }] : [];
   });
   const subtotal = lines.reduce((total, line) => total + line.product.price * line.quantity, 0);
-  const shipping = subtotal === 0 || subtotal >= 100 ? 0 : 9.95;
+  const shipping = 9.95;
   const total = subtotal + shipping;
-  const orderBody = encodeURIComponent(lines.map((line) => `${line.quantity} × ${line.product.name} — ${line.size}, ${line.color}`).join("\n") + `\n\nEstimated total: ${formatPrice(total)}`);
 
   if (lines.length === 0) {
     return (
@@ -57,9 +57,9 @@ export default function CartPage() {
       <aside className="cart-summary">
         <span>Order summary</span>
         <h2>Ready for the lane.</h2>
-        <dl><div><dt>Subtotal</dt><dd>{formatPrice(subtotal)}</dd></div><div><dt>Shipping</dt><dd>{shipping === 0 ? "Free" : formatPrice(shipping)}</dd></div><div><dt>Estimated total</dt><dd>{formatPrice(total)}</dd></div></dl>
-        <a href={`mailto:hello@ygcornhole.com?subject=YG%20Cornhole%20order%20request&body=${orderBody}`}>Send order request <ArrowRight size={17} /></a>
-        <p>Taxes and final shipping are confirmed by the shop before payment.</p>
+        <dl><div><dt>Subtotal</dt><dd>{formatPrice(subtotal)}</dd></div><div><dt>Shipping</dt><dd>{formatPrice(shipping)}</dd></div><div><dt>Total</dt><dd>{formatPrice(total)}</dd></div></dl>
+        <PayPalCheckout clientId={paypalClientId} environment={paypalEnvironment} items={items} />
+        <p>The PayPal approval screen shows the complete charge before payment.</p>
         <Link href="/shop">Continue shopping</Link>
       </aside>
     </section>

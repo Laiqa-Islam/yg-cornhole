@@ -16,17 +16,16 @@ import {
   Star,
   Target,
   Trophy,
-  Truck,
   Users,
 } from "lucide-react";
 import HomeMotion from "./ui/home-motion";
 import SiteHeader from "./ui/site-header";
 
 const products = [
-  { name: "Phenom X", profile: "Quick / composed", speed: "7 / 4.5", price: "$84.99", image: "/images/shop/phenom-x.jpeg", alt: "Patriotic skull Phenom X cornhole bags", slug: "phenom-x-bags" },
-  { name: "Felon X", profile: "True balance", speed: "7 / 5", price: "$79.99", image: "/images/shop/felon-x.jpeg", alt: "Patriotic Felon X cornhole bags", slug: "felon-x-bags" },
-  { name: "Menace X", profile: "Block / finish", speed: "8 / 3", price: "$79.99", image: "/images/shop/menace-x.jpeg", alt: "Patriotic Menace X cornhole bags", slug: "menace-x-bags" },
-  { name: "Prodigy X", profile: "Versatile pace", speed: "8 / 5", price: "$84.99", image: "/images/shop/prodigy-x.jpeg", alt: "Patriotic Prodigy X cornhole bags", slug: "prodigy-x-bags" },
+  { name: "Phenom X", profile: "Quick / composed", speed: "7 / 4.5", price: "$89.99", image: "/images/shop/phenom-x.jpeg", alt: "Patriotic skull Phenom X cornhole bags", slug: "phenom-x-bags" },
+  { name: "Felon X", profile: "True balance", speed: "7 / 5", price: "$89.99", image: "/images/shop/felon-x.jpeg", alt: "Patriotic Felon X cornhole bags", slug: "felon-x-bags" },
+  { name: "Menace X", profile: "Block / finish", speed: "8 / 3", price: "$89.99", image: "/images/shop/menace-x.jpeg", alt: "Patriotic Menace X cornhole bags", slug: "menace-x-bags" },
+  { name: "Prodigy X", profile: "Versatile pace", speed: "8 / 5", price: "$89.99", image: "/images/shop/prodigy-x.jpeg", alt: "Patriotic Prodigy X cornhole bags", slug: "prodigy-x-bags" },
 ];
 
 const customWork = [
@@ -54,20 +53,20 @@ export default function Home() {
       <section className="hero" aria-labelledby="hero-title">
         <Image
           className="hero-backdrop"
-          src="/images/pics/pic-01.png"
-          alt="Colorful wall of YG custom cornhole bags"
+          src="/images/yg-new-site-mast.jpeg"
+          alt="YG Cornhole professional apparel, ACL bags, and custom board lineup"
           fill
           priority
           sizes="100vw"
         />
         <div className="hero-shade" />
         <div className="hero-content">
-          <p className="hero-kicker hero-eyebrow">One brand. Every way to play.</p>
+          <p className="hero-kicker hero-eyebrow">Competition bags / custom boards / team gear</p>
           <h1 id="hero-title">
-            <span className="hero-line">Built for</span>
-            <span className="hero-line">the next bag.</span>
+            <span className="hero-line">One brand.</span>
+            <span className="hero-line">Every way to play.</span>
           </h1>
-          <p className="hero-lede">Competition-grade cornhole bags, custom boards, and apparel made for players who never stop tuning their game.</p>
+          <p className="hero-lede">Professional cornhole bags, custom boards, and apparel made for players who never stop tuning their game.</p>
           <div className="hero-actions">
             <Link className="button button--teal" href="/shop?category=cornhole-bags">Shop cornhole bags <ArrowRight size={17} /></Link>
             <Link className="button button--outline" href="/shop?category=custom-boards">Build custom boards</Link>
@@ -83,18 +82,17 @@ export default function Home() {
         <div><BadgeCheck /><span><strong>ACL approved</strong>Competition-ready bags</span></div>
         <div><Target /><span><strong>Player tuned</strong>Clear speed profiles</span></div>
         <div><Sparkles /><span><strong>Built your way</strong>Custom boards and gear</span></div>
-        <div><Truck /><span><strong>Free shipping</strong>Bag orders over $100</span></div>
       </section>
 
       <section className="category-section content-shell" aria-labelledby="category-title">
         <div className="section-header reveal-up">
-          <div><span className="section-label">Shop the lineup</span><h2 id="category-title">Gear for every kind of game.</h2></div>
+          <div><span className="section-label">Shop the lineup</span><h2 id="category-title">Pick your lane.</h2></div>
           <Link className="arrow-link" href="/shop">Shop all gear <ArrowRight size={16} /></Link>
         </div>
 
         <div className="category-grid">
           <Link className="category-card category-card--bags reveal-up" href="/acl-bags">
-            <Image src="/images/pics/pic-01.png" alt="YG Cornhole custom bag design lineup" fill sizes="(max-width: 760px) 100vw, 50vw" />
+            <Image src="/images/yg-new-site-mast.jpeg" alt="YG Cornhole professional product lineup" fill sizes="(max-width: 760px) 100vw, 50vw" />
             <div className="category-overlay" />
             <div className="category-copy"><span>Competition bags</span><h3>Find your feel.</h3><b>Shop bags <ArrowRight size={16} /></b></div>
           </Link>
@@ -119,7 +117,7 @@ export default function Home() {
         </div>
         <div className="drop-grid">
           <article className="drop-card drop-card--lineup reveal-clip">
-            <Image src="/images/pics/pic-01.png" alt="A colorful lineup of custom YG cornhole bag designs" fill sizes="(max-width: 760px) 100vw, 55vw" />
+            <Image src="/images/yg-new-site-mast.jpeg" alt="YG Cornhole apparel, competition bags, and custom board lineup" fill sizes="(max-width: 760px) 100vw, 55vw" />
             <div><span>More ways to play</span><strong>The full personality lineup</strong></div>
           </article>
           <article className="drop-card drop-card--cutout reveal-clip">
@@ -177,29 +175,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="throw-guide" id="throw-guide" aria-labelledby="guide-title">
-        <div className="guide-stage">
-          <div className="guide-copy">
-            <p className="eyebrow eyebrow--light"><span /> Find your feel</p>
-            <h2 id="guide-title"><span>One lane.</span><span>Your speed.</span></h2>
-            <p>Scroll the runway to see how the right bag changes your game—from a controlled block to a fast, clean finish.</p>
-          </div>
-          <div className="throw-lane" aria-hidden="true">
-            <div className="lane-lines"><i /><i /><i /></div>
-            <div className="lane-hole" />
-            <div className="flying-bag">
-              <Image src="/images/bags-ice-blue.jpeg" alt="" width={934} height={1245} sizes="180px" />
-            </div>
-            <span className="lane-label lane-label--slow">Control<br /><b>01</b></span>
-            <span className="lane-label lane-label--fast">Fast<br /><b>10</b></span>
-          </div>
-          <div className="guide-step">
-            <span>Throw profile</span>
-            <strong className="guide-word">CONTROL</strong>
-          </div>
-        </div>
-      </section>
-
       <section className="custom-work" aria-labelledby="custom-work-title">
         <div className="custom-work-shell content-shell">
           <div className="custom-work-intro reveal-up">
@@ -232,7 +207,7 @@ export default function Home() {
 
       <section className="brand-story" id="why-yg" aria-labelledby="story-title">
         <div className="story-image story-image--cutout reveal-clip">
-          <Image src="/images/pics/pic-01.png" alt="A wall of YG Cornhole bag designs developed across multiple collections" fill sizes="(max-width: 850px) 100vw, 50vw" />
+          <Image src="/images/yg-new-site-mast.jpeg" alt="YG Cornhole professional apparel, bags, and custom board range" fill sizes="(max-width: 850px) 100vw, 50vw" />
         </div>
         <div className="story-copy reveal-up">
           <span className="section-label">Built by people who play</span>

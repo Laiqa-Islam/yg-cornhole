@@ -68,7 +68,7 @@ img { display: block; }
 .mobile-menu nav a { min-height: 49px; display: flex; align-items: center; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 700; }
 .mobile-menu nav a:last-child { border: 0; }
 
-.hero { min-height: 760px; height: calc(100svh - 122px); max-height: 940px; position: relative; overflow: hidden; color: white; background-color: #0a1621; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px), radial-gradient(circle at 22% 45%, #263d50 0, #101f2d 34%, #09131d 72%); background-size: 54px 54px, 54px 54px, auto; }
+.hero { min-height: 760px; height: calc(100svh - 86px); max-height: 940px; position: relative; overflow: hidden; color: white; background-color: #0a1621; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px), radial-gradient(circle at 22% 45%, #263d50 0, #101f2d 34%, #09131d 72%); background-size: 54px 54px, 54px 54px, auto; }
 .hero-backdrop { width: 58% !important; right: auto !important; object-fit: contain; object-position: 28% 52%; filter: drop-shadow(0 35px 38px rgba(0,0,0,.45)); transform: translateX(-5%) scale(.91); }
 .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,13,21,.04) 0%, rgba(6,13,21,.08) 40%, rgba(6,13,21,.58) 58%, rgba(6,13,21,.96) 100%), linear-gradient(0deg, rgba(6,13,21,.48), transparent 58%); }
 .hero-content { width: min(610px, 44vw); position: absolute; z-index: 2; right: var(--gutter); top: 50%; transform: translateY(-50%); }
@@ -92,7 +92,7 @@ img { display: block; }
 .hero-corner span { font: 700 10px var(--font-mono), monospace; color: rgba(255,255,255,.66); }
 .hero-corner strong { font: 800 25px var(--font-display), sans-serif; letter-spacing: .04em; }
 
-.trust-strip { min-height: 108px; display: grid; grid-template-columns: repeat(4, 1fr); color: white; background: #142535; border-bottom: 1px solid rgba(255,255,255,.12); }
+.trust-strip { min-height: 108px; display: grid; grid-template-columns: repeat(3, 1fr); color: white; background: #142535; border-bottom: 1px solid rgba(255,255,255,.12); }
 .trust-strip > div { padding: 22px clamp(18px, 3vw, 46px); display: flex; align-items: center; gap: 14px; border-right: 1px solid rgba(255,255,255,.12); }
 .trust-strip > div:last-child { border: 0; }
 .trust-strip svg { flex: 0 0 auto; color: var(--teal-bright); }
