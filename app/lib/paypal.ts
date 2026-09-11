@@ -9,21 +9,27 @@ type PayPalErrorBody = {
 
 export class PayPalRequestError extends Error {
   status: number;
+  code: string;
 
-  constructor(message: string, status: number) {
+  constructor(message: string, status: number, code = "PAYPAL_REQUEST_FAILED") {
     super(message);
     this.name = "PayPalRequestError";
     this.status = status;
+    this.code = code;
   }
 }
 
-function getPayPalConfig() {
+export function getPayPalConfig() {
   const clientId = process.env.PAYPAL_CLIENT_ID;
   const clientSecret = process.env.PAYPAL_CLIENT_SECRET;
   const environment: PayPalEnvironment = process.env.PAYPAL_ENV === "live" ? "live" : "sandbox";
 
   if (!clientId || !clientSecret) {
-    throw new PayPalRequestError("PayPal is not configured on the server.", 503);
+    throw new PayPalRequestError(
+      "The PayPal environment variables are missing from this deployment.",
+      503,
+      "PAYPAL_CONFIG_MISSING",
+    );
   }
 
   return {
@@ -48,9 +54,14 @@ async function getAccessToken() {
     cache: "no-store",
   });
 
-  const body = await response.json() as { access_token?: string; error_description?: string };
+  const body = await response.json() as { access_token?: string; error?: string; error_description?: string };
   if (!response.ok || !body.access_token) {
-    throw new PayPalRequestError(body.error_description ?? "PayPal authentication failed.", 502);
+    const invalidCredentials = body.error === "invalid_client" || response.status === 401;
+    throw new PayPalRequestError(
+      invalidCredentials ? "PayPal rejected the configured Client ID and Secret." : body.error_description ?? "PayPal authentication failed.",
+      invalidCredentials ? 401 : 502,
+      invalidCredentials ? "PAYPAL_INVALID_CREDENTIALS" : "PAYPAL_AUTH_FAILED",
+    );
   }
 
   return body.access_token;
@@ -78,4 +89,3 @@ export async function paypalRequest<T>(path: string, init: RequestInit = {}) {
 
   return body;
 }
-

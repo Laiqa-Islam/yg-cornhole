@@ -7,7 +7,13 @@ import { formatPrice, products } from "../data/products";
 import { useCart } from "./cart-provider";
 import PayPalCheckout from "./paypal-checkout";
 
-export default function CartPage({ paypalClientId, paypalEnvironment }: { paypalClientId: string; paypalEnvironment: "sandbox" | "live" }) {
+export default function CartPage({
+  paypalEnvironment,
+  paypalClientId,
+}: {
+  paypalEnvironment: "sandbox" | "live";
+  paypalClientId: string;
+}) {
   const { items, updateQuantity, removeItem, clearCart } = useCart();
   const lines = items.flatMap((line) => {
     const product = products.find((candidate) => candidate.slug === line.slug);
@@ -58,7 +64,7 @@ export default function CartPage({ paypalClientId, paypalEnvironment }: { paypal
         <span>Order summary</span>
         <h2>Ready for the lane.</h2>
         <dl><div><dt>Subtotal</dt><dd>{formatPrice(subtotal)}</dd></div><div><dt>Shipping</dt><dd>{formatPrice(shipping)}</dd></div><div><dt>Total</dt><dd>{formatPrice(total)}</dd></div></dl>
-        <PayPalCheckout clientId={paypalClientId} environment={paypalEnvironment} items={items} />
+        <PayPalCheckout environment={paypalEnvironment} clientId={paypalClientId} items={items} />
         <p>The PayPal approval screen shows the complete charge before payment.</p>
         <Link href="/shop">Continue shopping</Link>
       </aside>

@@ -3,16 +3,17 @@
 import Script from "next/script";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { LockKeyhole, ShieldCheck } from "lucide-react";
+import { AlertTriangle, LockKeyhole, RefreshCw, ShieldCheck } from "lucide-react";
 import { toast } from "react-toastify";
 import type { CartLine } from "./cart-provider";
 import { useCart } from "./cart-provider";
 
 type PayPalEnvironment = "sandbox" | "live";
 type PayPalOrderData = { orderId: string };
+type CheckoutIssue = { code: string; title: string; detail: string; action: string };
 type PayPalSDK = {
-  createInstance: (config: { clientId: string; components: string[] }) => Promise<{
-    findEligibleMethods: () => Promise<{ isEligible: (method: string) => boolean }>;
+  createInstance: (config: { clientId: string; components: string[]; pageType: "checkout" }) => Promise<{
+    findEligibleMethods: (options: { currencyCode: "USD" }) => Promise<{ isEligible: (method: string) => boolean }>;
     createPayPalOneTimePaymentSession: (callbacks: {
       onApprove: (data: PayPalOrderData) => Promise<unknown>;
       onCancel: () => void;
@@ -33,20 +34,62 @@ async function readJson(response: Response) {
   return data;
 }
 
+function describeIssue(code: string, detail: string): CheckoutIssue {
+  if (code === "PAYPAL_CONFIG_MISSING") {
+    return {
+      code,
+      title: "PayPal is not configured",
+      detail,
+      action: "Add all three PayPal variables to this deployment, then redeploy the site.",
+    };
+  }
+  if (code === "PAYPAL_INVALID_CREDENTIALS") {
+    return {
+      code,
+      title: "PayPal credentials were rejected",
+      detail,
+      action: "Replace them with a matching active Client ID and Secret from the same PayPal REST app.",
+    };
+  }
+  if (code === "PAYPAL_NOT_ELIGIBLE") {
+    return {
+      code,
+      title: "PayPal is unavailable here",
+      detail,
+      action: "Try another browser or location, or contact the shop for another way to pay.",
+    };
+  }
+  if (code === "PAYPAL_SDK_LOAD_FAILED") {
+    return {
+      code,
+      title: "PayPal could not load",
+      detail,
+      action: "Check the connection or content blocker, then refresh this page.",
+    };
+  }
+  return {
+    code,
+    title: "PayPal connection failed",
+    detail,
+    action: "No payment was attempted. Retry the connection or contact the shop.",
+  };
+}
+
 export default function PayPalCheckout({
-  clientId,
   environment,
+  clientId,
   items,
 }: {
-  clientId: string;
   environment: PayPalEnvironment;
+  clientId: string;
   items: CartLine[];
 }) {
   const router = useRouter();
   const { clearCart } = useCart();
   const containerRef = useRef<HTMLDivElement>(null);
-  const [sdkReady, setSdkReady] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
+  const [issue, setIssue] = useState<CheckoutIssue | null>(null);
+  const [retryKey, setRetryKey] = useState(0);
   const cartKey = useMemo(() => JSON.stringify(items), [items]);
   const sdkSource = environment === "live"
     ? "https://www.paypal.com/web-sdk/v6/core"
@@ -54,7 +97,7 @@ export default function PayPalCheckout({
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!sdkReady || !clientId || !container || !window.paypal) return;
+    if (!container) return;
     let disposed = false;
     let button: HTMLElement | null = null;
     let clickHandler: (() => Promise<void>) | null = null;
@@ -62,9 +105,31 @@ export default function PayPalCheckout({
     async function mountButton() {
       try {
         setStatus("loading");
-        const sdk = await window.paypal!.createInstance({ clientId, components: ["paypal-payments"] });
-        const eligibility = await sdk.findEligibleMethods();
-        if (!eligibility.isEligible("paypal")) throw new Error("PayPal is not available for this browser or location.");
+        setIssue(null);
+        for (let attempt = 0; attempt < 120 && !window.paypal; attempt += 1) {
+          await new Promise((resolve) => window.setTimeout(resolve, 125));
+        }
+        if (!window.paypal) {
+          const error = new Error("The PayPal checkout script loaded but did not finish initializing.") as Error & { code?: string };
+          error.code = "PAYPAL_SDK_LOAD_FAILED";
+          throw error;
+        }
+        if (!clientId) {
+          const error = new Error("The PayPal Client ID is missing from this deployment.") as Error & { code?: string };
+          error.code = "PAYPAL_CONFIG_MISSING";
+          throw error;
+        }
+        const sdk = await window.paypal.createInstance({
+          clientId,
+          components: ["paypal-payments"],
+          pageType: "checkout",
+        });
+        const eligibility = await sdk.findEligibleMethods({ currencyCode: "USD" });
+        if (!eligibility.isEligible("paypal")) {
+          const error = new Error("PayPal did not mark this checkout as eligible for the current browser and location.") as Error & { code?: string };
+          error.code = "PAYPAL_NOT_ELIGIBLE";
+          throw error;
+        }
         const session = await sdk.createPayPalOneTimePaymentSession({
           onApprove: async ({ orderId }) => {
             const response = await fetch("/api/paypal/capture-order", {
@@ -108,7 +173,12 @@ export default function PayPalCheckout({
         setStatus("ready");
       } catch (error) {
         setStatus("error");
-        toast.error(error instanceof Error ? error.message : "PayPal could not load.");
+        const message = error instanceof Error ? error.message : "PayPal could not load.";
+        const code = error && typeof error === "object" && "code" in error && typeof error.code === "string"
+          ? error.code
+          : "PAYPAL_CONNECTION_FAILED";
+        setIssue(describeIssue(code, message));
+        toast.error(message);
       }
     }
 
@@ -117,25 +187,44 @@ export default function PayPalCheckout({
       disposed = true;
       if (button && clickHandler) button.removeEventListener("click", clickHandler);
     };
-  }, [cartKey, clearCart, clientId, items, router, sdkReady]);
+  }, [cartKey, clearCart, clientId, items, retryKey, router]);
 
-  if (!clientId) {
-    return (
-      <div className="paypal-config-note" role="status">
-        <LockKeyhole size={18} />
-        <div><strong>PayPal setup required</strong><span>Add the server environment variables to enable checkout.</span></div>
-      </div>
+  function retryCheckout() {
+    setStatus("loading");
+    setIssue(null);
+    setRetryKey((value) => value + 1);
+  }
+
+  function handleSdkError() {
+    const nextIssue = describeIssue(
+      "PAYPAL_SDK_LOAD_FAILED",
+      "The PayPal checkout script did not load from PayPal.",
     );
+    setStatus("error");
+    setIssue(nextIssue);
+    toast.error(nextIssue.title);
   }
 
   return (
     <div className="paypal-checkout">
-      <Script src={sdkSource} strategy="afterInteractive" onReady={() => setSdkReady(true)} onError={() => setStatus("error")} />
+      <Script src={sdkSource} strategy="afterInteractive" onError={handleSdkError} />
       <div className="paypal-checkout__heading"><span>Secure checkout</span><ShieldCheck size={19} /></div>
-      <div className="paypal-button-shell" ref={containerRef} aria-busy={status === "loading"}>
-        {status !== "ready" && status !== "error" ? <p>Loading PayPal checkout…</p> : null}
-        {status === "error" ? <p>PayPal is unavailable right now. Refresh the page or try again shortly.</p> : null}
+      <div className={`paypal-button-shell${status === "error" ? " is-hidden" : ""}`} ref={containerRef} aria-busy={status === "loading"}>
+        {status !== "ready" ? <p>Connecting securely to PayPal…</p> : null}
       </div>
+      {status === "error" && issue ? (
+        <div className="paypal-diagnostic" role="alert" aria-live="assertive">
+          <AlertTriangle size={24} />
+          <div>
+            <small>Checkout blocked</small>
+            <strong>{issue.title}</strong>
+            <p>{issue.detail}</p>
+            <p>{issue.action}</p>
+          </div>
+          <code>{issue.code}</code>
+          <button type="button" onClick={retryCheckout}><RefreshCw size={14} /> Retry PayPal</button>
+        </div>
+      ) : null}
       <p><LockKeyhole size={13} /> Payment is approved in PayPal and verified by the YG Cornhole server.</p>
     </div>
   );
