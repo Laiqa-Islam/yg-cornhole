@@ -18,9 +18,9 @@ type PayPalSDK = {
       onApprove: (data: PayPalOrderData) => Promise<unknown>;
       onCancel: () => void;
       onError: () => void;
-    }) => Promise<{
+    }) => {
       start: (options: { presentationMode: "auto" }, order: Promise<{ orderId: string }>) => Promise<void>;
-    }>;
+    };
   }>;
 };
 
@@ -156,7 +156,7 @@ export default function PayPalCheckout({
           error.code = "PAYPAL_NOT_ELIGIBLE";
           throw error;
         }
-        const session = await withTimeout(sdk.createPayPalOneTimePaymentSession({
+        const session = sdk.createPayPalOneTimePaymentSession({
           onApprove: async ({ orderId }) => {
             const response = await fetch("/api/paypal/capture-order", {
               method: "POST",
@@ -172,7 +172,7 @@ export default function PayPalCheckout({
           },
           onCancel: () => toast.info("PayPal checkout was cancelled. Your cart is unchanged."),
           onError: () => toast.error("PayPal could not complete the payment. Please try again."),
-        }), 8_000, "PayPal could not prepare the payment session.");
+        });
 
         if (disposed || !containerRef.current) return;
         containerRef.current.replaceChildren();
