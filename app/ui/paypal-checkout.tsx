@@ -34,6 +34,24 @@ async function readJson(response: Response) {
   return data;
 }
 
+function withTimeout<T>(promise: Promise<T>, milliseconds: number, message: string) {
+  return new Promise<T>((resolve, reject) => {
+    const timeoutId = window.setTimeout(() => {
+      const error = new Error(message) as Error & { code?: string };
+      error.code = "PAYPAL_SDK_LOAD_FAILED";
+      reject(error);
+    }, milliseconds);
+
+    promise.then((value) => {
+      window.clearTimeout(timeoutId);
+      resolve(value);
+    }, (error) => {
+      window.clearTimeout(timeoutId);
+      reject(error);
+    });
+  });
+}
+
 function describeIssue(code: string, detail: string): CheckoutIssue {
   if (code === "PAYPAL_CONFIG_MISSING") {
     return {
@@ -119,18 +137,26 @@ export default function PayPalCheckout({
           error.code = "PAYPAL_CONFIG_MISSING";
           throw error;
         }
-        const sdk = await window.paypal.createInstance({
-          clientId,
-          components: ["paypal-payments"],
-          pageType: "checkout",
-        });
-        const eligibility = await sdk.findEligibleMethods({ currencyCode: "USD" });
+        const sdk = await withTimeout(
+          window.paypal.createInstance({
+            clientId,
+            components: ["paypal-payments"],
+            pageType: "checkout",
+          }),
+          12_000,
+          "PayPal loaded but did not finish initializing the checkout.",
+        );
+        const eligibility = await withTimeout(
+          sdk.findEligibleMethods({ currencyCode: "USD" }),
+          8_000,
+          "PayPal could not confirm checkout availability.",
+        );
         if (!eligibility.isEligible("paypal")) {
           const error = new Error("PayPal did not mark this checkout as eligible for the current browser and location.") as Error & { code?: string };
           error.code = "PAYPAL_NOT_ELIGIBLE";
           throw error;
         }
-        const session = await sdk.createPayPalOneTimePaymentSession({
+        const session = await withTimeout(sdk.createPayPalOneTimePaymentSession({
           onApprove: async ({ orderId }) => {
             const response = await fetch("/api/paypal/capture-order", {
               method: "POST",
@@ -146,7 +172,7 @@ export default function PayPalCheckout({
           },
           onCancel: () => toast.info("PayPal checkout was cancelled. Your cart is unchanged."),
           onError: () => toast.error("PayPal could not complete the payment. Please try again."),
-        });
+        }), 8_000, "PayPal could not prepare the payment session.");
 
         if (disposed || !containerRef.current) return;
         containerRef.current.replaceChildren();
@@ -209,9 +235,14 @@ export default function PayPalCheckout({
     <div className="paypal-checkout">
       <Script src={sdkSource} strategy="afterInteractive" onError={handleSdkError} />
       <div className="paypal-checkout__heading"><span>Secure checkout</span><ShieldCheck size={19} /></div>
-      <div className={`paypal-button-shell${status === "error" ? " is-hidden" : ""}`} ref={containerRef} aria-busy={status === "loading"}>
-        {status !== "ready" ? <p>Connecting securely to PayPal…</p> : null}
-      </div>
+      <div
+        className={`paypal-button-shell${status === "error" ? " is-hidden" : ""}${status !== "ready" && status !== "error" ? " is-loading" : ""}`}
+        ref={containerRef}
+        role="status"
+        aria-live="polite"
+        aria-label={status !== "ready" && status !== "error" ? "Connecting securely to PayPal" : "PayPal checkout ready"}
+        aria-busy={status === "loading"}
+      />
       {status === "error" && issue ? (
         <div className="paypal-diagnostic" role="alert" aria-live="assertive">
           <AlertTriangle size={24} />

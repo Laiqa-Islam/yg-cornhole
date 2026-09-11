@@ -149,7 +149,7 @@
 .paypal-button-shell { min-height: 48px; position: relative; display: grid; align-items: center; overflow: hidden; background: #f2ba36; }
 .paypal-button-shell.is-hidden { display: none; }
 .paypal-button-shell paypal-button { width: 100%; min-height: 48px; display: block; cursor: pointer; }
-.paypal-button-shell > p { margin: 0; padding: 14px; color: #172638; text-align: center; font: 700 10px var(--font-mono), monospace; text-transform: uppercase; }
+.paypal-button-shell.is-loading::before { content: "Connecting securely to PayPal…"; padding: 14px; color: #172638; text-align: center; font: 700 10px var(--font-mono), monospace; text-transform: uppercase; }
 .paypal-diagnostic { padding: 18px; display: grid; grid-template-columns: 27px 1fr; gap: 12px 13px; background: #35191e; border: 1px solid rgba(255,112,117,.55); border-left: 5px solid #ff646a; box-shadow: 0 13px 28px rgba(0,0,0,.2); }
 .paypal-diagnostic > svg { color: #ff777c; }
 .paypal-diagnostic > div { min-width: 0; display: grid; gap: 6px; }
