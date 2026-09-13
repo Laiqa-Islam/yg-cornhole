@@ -27,14 +27,29 @@ function cleanShipping(raw: unknown) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Enter a valid email address.");
   const countryCode = text(shipping.countryCode, "country", 2).toUpperCase();
   if (!new Set(["US", "CA"]).has(countryCode)) throw new Error("Choose a supported delivery country.");
+  const state = text(shipping.state, "state or province", 120).toUpperCase();
+  const postalCode = text(shipping.postalCode, "postal code", 60).toUpperCase();
+
+  if (countryCode === "US" && !/^[A-Z]{2}$/.test(state)) {
+    throw new Error("Enter a 2-letter US state abbreviation, such as TX.");
+  }
+  if (countryCode === "US" && !/^\d{5}(?:-\d{4})?$/.test(postalCode)) {
+    throw new Error("Enter a valid US ZIP code, such as 75001.");
+  }
+  if (countryCode === "CA" && !/^[A-Z]{2}$/.test(state)) {
+    throw new Error("Enter a 2-letter Canadian province abbreviation, such as ON.");
+  }
+  if (countryCode === "CA" && !/^[A-Z]\d[A-Z][ -]?\d[A-Z]\d$/.test(postalCode)) {
+    throw new Error("Enter a valid Canadian postal code, such as M5V 2T6.");
+  }
 
   return {
     fullName: text(shipping.fullName, "full name", 300),
     email,
     addressLine1: text(shipping.addressLine1, "street address", 300),
     city: text(shipping.city, "city", 120),
-    state: text(shipping.state, "state or province", 120),
-    postalCode: text(shipping.postalCode, "postal code", 60),
+    state,
+    postalCode,
     countryCode,
   };
 }
@@ -88,6 +103,7 @@ export async function POST(request: Request) {
   } catch (error) {
     const status = error instanceof PayPalRequestError ? error.status : 400;
     const message = error instanceof Error ? error.message : "The PayPal order could not be created.";
-    return Response.json({ error: message }, { status });
+    const code = error instanceof PayPalRequestError ? error.code : "CHECKOUT_DETAILS_INVALID";
+    return Response.json({ error: message, code }, { status });
   }
 }

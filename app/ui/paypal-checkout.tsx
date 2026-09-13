@@ -136,6 +136,39 @@ function describeIssue(code: string, detail: string): CheckoutIssue {
   };
 }
 
+function describeCardFailure(error: unknown, environment: PayPalEnvironment) {
+  const fallback = "The card payment could not be completed. Check the card and address details, then try again.";
+  const rawMessage = typeof error === "string"
+    ? error
+    : error instanceof Error
+      ? error.message
+      : "";
+  let parsed: unknown;
+
+  try {
+    parsed = rawMessage.trim().startsWith("{") ? JSON.parse(rawMessage) : undefined;
+  } catch {
+    parsed = undefined;
+  }
+
+  const serialized = parsed ? JSON.stringify(parsed) : rawMessage;
+  if (/UNPROCESSABLE_ENTITY|ERR_DEV_RECEIVED_CLIENT_ERROR_RESPONSE/i.test(serialized)) {
+    return environment === "sandbox"
+      ? "PayPal Sandbox rejected these test details. Use a PayPal Sandbox test card (not 4242), a future expiry, and a valid state/province and postal code."
+      : "PayPal could not process these card or billing details. Check the card number, expiry, security code, and address, then try again.";
+  }
+
+  if (/INSTRUMENT_DECLINED|CARD_DECLINED|DECLINED/i.test(serialized)) {
+    return "The card was declined. Try another card or choose PayPal.";
+  }
+
+  if (rawMessage && !rawMessage.trim().startsWith("{") && rawMessage.length <= 180) {
+    return rawMessage;
+  }
+
+  return fallback;
+}
+
 export default function PayPalCheckout({
   environment,
   clientId,
@@ -396,7 +429,7 @@ export default function PayPalCheckout({
         return;
       }
       if (result.state !== "succeeded") {
-        const message = result.data?.message ?? "Check the card details and try again.";
+        const message = describeCardFailure(result.data?.message, environment);
         setCardMessage(message);
         toast.error(message);
         return;
@@ -415,7 +448,7 @@ export default function PayPalCheckout({
       router.push("/order-confirmation?order_id=" + encodeURIComponent(completedOrder.id));
       clearCart();
     } catch (error) {
-      const message = error instanceof Error ? error.message : "The card payment could not be completed.";
+      const message = describeCardFailure(error, environment);
       setCardMessage(message);
       toast.error(message);
     } finally {
@@ -479,6 +512,7 @@ export default function PayPalCheckout({
             <label className="card-field-label" htmlFor="card-postal-code">Postal code<input id="card-postal-code" name="postalCode" autoComplete="shipping postal-code" inputMode="text" required /></label>
             <label className="card-field-label" htmlFor="card-country">Country<select id="card-country" name="countryCode" autoComplete="shipping country" defaultValue="US"><option value="US">United States</option><option value="CA">Canada</option></select></label>
           </div>
+          {environment === "sandbox" ? <p className="sandbox-card-hint">Sandbox test: use a PayPal test card such as Visa 4005 5192 0000 0004, a future expiry, and any 3-digit security code.</p> : null}
           {status !== "error" ? <button className="card-pay-button" type="submit" disabled={status !== "ready" || cardSubmitting}><CreditCard size={17} />{cardSubmitting ? "Processing payment…" : "Pay securely by card"}</button> : null}
           {cardMessage ? <p className="card-payment-message" role="alert">{cardMessage}</p> : null}
         </form>
