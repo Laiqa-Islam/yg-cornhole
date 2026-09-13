@@ -65,7 +65,7 @@ export default function CartPage({
         <h2>Ready for the lane.</h2>
         <dl><div><dt>Subtotal</dt><dd>{formatPrice(subtotal)}</dd></div><div><dt>Shipping</dt><dd>{formatPrice(shipping)}</dd></div><div><dt>Total</dt><dd>{formatPrice(total)}</dd></div></dl>
         <PayPalCheckout environment={paypalEnvironment} clientId={paypalClientId} items={items} />
-        <p>The PayPal approval screen shows the complete charge before payment.</p>
+        <p>Choose PayPal or enter a debit or credit card. Your payment details are handled securely by PayPal.</p>
         <Link href="/shop">Continue shopping</Link>
       </aside>
     </section>

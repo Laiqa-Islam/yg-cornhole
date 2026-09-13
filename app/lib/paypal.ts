@@ -40,7 +40,7 @@ export function getPayPalConfig() {
   };
 }
 
-async function getAccessToken() {
+async function requestOAuthToken(formBody: string) {
   const { clientId, clientSecret, apiBase } = getPayPalConfig();
   const authorization = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
   const response = await fetch(`${apiBase}/v1/oauth2/token`, {
@@ -50,7 +50,7 @@ async function getAccessToken() {
       Authorization: `Basic ${authorization}`,
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: "grant_type=client_credentials",
+    body: formBody,
     cache: "no-store",
   });
 
@@ -65,6 +65,16 @@ async function getAccessToken() {
   }
 
   return body.access_token;
+}
+
+async function getAccessToken() {
+  return requestOAuthToken("grant_type=client_credentials&response_type=token");
+}
+
+export async function getBrowserSafeClientToken() {
+  return requestOAuthToken(
+    "grant_type=client_credentials&response_type=client_token&intent=sdk_init",
+  );
 }
 
 export async function paypalRequest<T>(path: string, init: RequestInit = {}) {

@@ -146,10 +146,27 @@
 .paypal-checkout__heading { margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; color: white; }
 .paypal-checkout__heading span { font: 700 9px var(--font-mono), monospace; letter-spacing: .1em; text-transform: uppercase; }
 .paypal-checkout__heading svg { color: var(--teal-bright); }
+.payment-method-tabs { margin-bottom: 14px; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid rgba(255,255,255,.2); }
+.payment-method-tabs button { min-height: 48px; padding: 0 10px; display: flex; align-items: center; justify-content: center; gap: 8px; border: 0; background: transparent; color: #aebac3; font: 700 9px var(--font-mono), monospace; text-transform: uppercase; cursor: pointer; transition: background .2s ease, color .2s ease, box-shadow .2s ease; }
+.payment-method-tabs button + button { border-left: 1px solid rgba(255,255,255,.2); }
+.payment-method-tabs button[aria-pressed="true"] { background: #f3f5f6; color: var(--ink); box-shadow: inset 0 -3px 0 var(--red); }
+.payment-method-tabs button:focus-visible, .card-pay-button:focus-visible, .card-field-label input:focus-visible, .card-field-label select:focus-visible { outline: 3px solid var(--teal-bright); outline-offset: 2px; }
 .paypal-button-shell { min-height: 48px; position: relative; display: grid; align-items: center; overflow: hidden; background: #f2ba36; }
 .paypal-button-shell.is-hidden { display: none; }
 .paypal-button-shell paypal-button { width: 100%; min-height: 48px; display: block; cursor: pointer; }
 .paypal-button-shell.is-loading::before { content: "Connecting securely to PayPal…"; padding: 14px; color: #172638; text-align: center; font: 700 10px var(--font-mono), monospace; text-transform: uppercase; }
+.card-payment-form { display: grid; gap: 13px; }
+.card-shipping-heading { margin-top: 5px; padding-top: 14px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-top: 1px solid rgba(255,255,255,.14); }
+.card-shipping-heading span { color: white; font: 700 10px var(--font-mono), monospace; text-transform: uppercase; }
+.card-shipping-heading small { color: #8997a2; font: 700 8px var(--font-mono), monospace; text-transform: uppercase; }
+.card-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.card-field-label { display: grid; gap: 7px; color: #b9c4cc; font: 700 9px var(--font-mono), monospace; letter-spacing: .05em; text-transform: uppercase; }
+.card-field-host, .card-field-label input, .card-field-label select { width: 100%; height: 50px; overflow: hidden; border: 1px solid rgba(255,255,255,.26); background: #f7f8f8; color: var(--ink); }
+.card-field-label input, .card-field-label select { padding: 0 14px; border-radius: 0; font-size: 16px; outline: none; }
+.card-pay-button { min-height: 52px; padding: 0 16px; display: flex; align-items: center; justify-content: center; gap: 9px; border: 0; background: var(--red); color: white; font: 700 10px var(--font-mono), monospace; text-transform: uppercase; cursor: pointer; transition: background .2s ease, opacity .2s ease; }
+.card-pay-button:hover:not(:disabled) { background: #d33a42; }
+.card-pay-button:disabled { opacity: .58; cursor: wait; }
+.card-payment-message { margin: 0; padding: 10px 12px; border-left: 3px solid #ff777c; background: rgba(255,100,106,.12); color: #ffd5d7; font-size: 11px; line-height: 1.5; }
 .paypal-diagnostic { padding: 18px; display: grid; grid-template-columns: 27px 1fr; gap: 12px 13px; background: #35191e; border: 1px solid rgba(255,112,117,.55); border-left: 5px solid #ff646a; box-shadow: 0 13px 28px rgba(0,0,0,.2); }
 .paypal-diagnostic > svg { color: #ff777c; }
 .paypal-diagnostic > div { min-width: 0; display: grid; gap: 6px; }
